@@ -28,8 +28,8 @@ namespace work.ctrl3d
         public UnityEvent onHideStarted;
         public UnityEvent onHideCompleted;
 
-        [HideInInspector, SerializeField] private RectTransform rectTransform;
-        [HideInInspector, SerializeField] private CanvasGroup canvasGroup;
+        private RectTransform _rectTransform;
+        private CanvasGroup _canvasGroup;
 
         public event Action OnShowStarted;
         public event Action OnShowCompleted;
@@ -38,22 +38,22 @@ namespace work.ctrl3d
 
         private void Awake()
         {
-            rectTransform = GetComponent<RectTransform>();
-            canvasGroup = GetComponent<CanvasGroup>();
+            _rectTransform = GetComponent<RectTransform>();
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
 
         private void OnEnable()
         {
-            rectTransform.SetAnchorPreset(anchorPreset);
+            _rectTransform.SetAnchorPreset(anchorPreset);
         }
 
         public virtual void SetData(UIContainerData data)
         {
             if (data.name != null) gameObject.name = data.name;
-            if (data.anchorPreset != AnchorPreset.UseDefault) rectTransform.SetAnchorPreset(data.anchorPreset);
-            if (data.position != Vector2.zero) rectTransform.anchoredPosition = data.position;
-            if (data.sizeDelta != Vector2.zero) rectTransform.sizeDelta = data.sizeDelta;
-            if (data.offset != Vector2.zero) rectTransform.anchoredPosition = data.offset;
+            if (data.anchorPreset != AnchorPreset.UseDefault) _rectTransform.SetAnchorPreset(data.anchorPreset);
+            if (data.position != Vector2.zero) _rectTransform.anchoredPosition = data.position;
+            if (data.sizeDelta != Vector2.zero) _rectTransform.sizeDelta = data.sizeDelta;
+            if (data.offset != Vector2.zero) _rectTransform.anchoredPosition = data.offset;
             if (data.showEase != Ease.Linear) showEase = data.showEase;
             if (data.showDuration != 0f) showDuration = data.showDuration;
             if (data.hideEase != Ease.Linear) hideEase = data.hideEase;
@@ -62,9 +62,9 @@ namespace work.ctrl3d
 
         public virtual void SetActive(bool isActive, float canvasGroupAlpha)
         {
-            canvasGroup.alpha = canvasGroupAlpha;
-            canvasGroup.blocksRaycasts = isActive;
-            canvasGroup.interactable = isActive;
+            _canvasGroup.alpha = canvasGroupAlpha;
+            _canvasGroup.blocksRaycasts = isActive;
+            _canvasGroup.interactable = isActive;
             gameObject.SetActive(isActive);
         }
 
@@ -75,7 +75,7 @@ namespace work.ctrl3d
 
             SetActive(true, 0f);
 
-            await LMotion.Create(0f, 1f, showDuration).WithEase(showEase).BindToAlpha(canvasGroup)
+            await LMotion.Create(0f, 1f, showDuration).WithEase(showEase).BindToAlpha(_canvasGroup)
                 .ToUniTask(CancellationTokenSource
                     .CreateLinkedTokenSource(destroyCancellationToken, cancellationToken)
                     .Token);
@@ -86,13 +86,13 @@ namespace work.ctrl3d
 
         public virtual async UniTask HideAsync(bool isActive = false, CancellationToken cancellationToken = default)
         {
-            if (!canvasGroup) return;
-            if (canvasGroup.alpha == 0 && isActive) return;
+            if (!_canvasGroup) return;
+            if (_canvasGroup.alpha == 0 && isActive) return;
 
             OnHideStarted?.Invoke();
             onHideStarted?.Invoke();
 
-            await LMotion.Create(1f, 0f, hideDuration).WithEase(hideEase).BindToAlpha(canvasGroup)
+            await LMotion.Create(1f, 0f, hideDuration).WithEase(hideEase).BindToAlpha(_canvasGroup)
                 .ToUniTask(CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken, cancellationToken)
                     .Token);
             SetActive(isActive, 0f);
@@ -110,7 +110,9 @@ namespace work.ctrl3d
 
         private void OnValidate()
         {
-            rectTransform.SetAnchorPreset(anchorPreset);
+            if (!_rectTransform) _rectTransform = GetComponent<RectTransform>();
+            if(!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
+            _rectTransform.SetAnchorPreset(anchorPreset);
         }
 
         [Button, HorizontalGroup]
