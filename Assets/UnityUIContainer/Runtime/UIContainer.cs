@@ -1,4 +1,4 @@
-#if ALCHEMY_SUPPORT
+//#if ALCHEMY_SUPPORT
 using System;
 using System.Threading;
 using Alchemy.Inspector;
@@ -36,13 +36,13 @@ namespace work.ctrl3d
         public event Action OnHideStarted;
         public event Action OnHideCompleted;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             RectTransform = GetComponent<RectTransform>();
             CanvasGroup = GetComponent<CanvasGroup>();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             RectTransform.SetAnchorPreset(anchorPreset);
         }
@@ -83,13 +83,6 @@ namespace work.ctrl3d
             OnShowCompleted?.Invoke();
             onShowCompleted?.Invoke();
         }
-
-        public void SetSizeDelta(float width, float height) => RectTransform.SetSizeDelta(width, height);
-        public void SetSizeDelta(Vector2 sizeDelta) => RectTransform.SetSizeDelta(sizeDelta);
-        public void SetAnchoredPosition(float x, float y) => RectTransform.SetAnchoredPosition(x, y);
-        public void SetAnchoredPosition(Vector2 position) => RectTransform.SetAnchoredPosition(position);
-        public void SetAnchoredPosition3D(float x, float y, float z) => RectTransform.SetAnchoredPosition3D(x, y, z);
-        public void SetAnchoredPosition3D(Vector3 position) => RectTransform.SetAnchoredPosition3D(position);
         
         public virtual async UniTask HideAsync(bool isActive = false, CancellationToken cancellationToken = default)
         {
@@ -114,6 +107,13 @@ namespace work.ctrl3d
             Destroy(gameObject);
             await UniTask.Yield();
         }
+        
+        public void SetSizeDelta(float width, float height) => RectTransform.SetSizeDelta(width, height);
+        public void SetSizeDelta(Vector2 sizeDelta) => RectTransform.SetSizeDelta(sizeDelta);
+        public void SetAnchoredPosition(float x, float y) => RectTransform.SetAnchoredPosition(x, y);
+        public void SetAnchoredPosition(Vector2 position) => RectTransform.SetAnchoredPosition(position);
+        public void SetAnchoredPosition3D(float x, float y, float z) => RectTransform.SetAnchoredPosition3D(x, y, z);
+        public void SetAnchoredPosition3D(Vector3 position) => RectTransform.SetAnchoredPosition3D(position);
 
         private void OnValidate()
         {
@@ -129,4 +129,4 @@ namespace work.ctrl3d
         private void Hide() => HideAsync().Forget();
     }
 }
-#endif
+//#endif
