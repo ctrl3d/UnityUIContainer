@@ -1,3 +1,4 @@
+#if ALCHEMY_SUPPORT
 using System;
 using System.Threading;
 using Alchemy.Inspector;
@@ -26,7 +27,7 @@ namespace work.ctrl3d
         public UnityEvent onShowCompleted;
         public UnityEvent onHideStarted;
         public UnityEvent onHideCompleted;
-        
+
         [HideInInspector, SerializeField] private RectTransform rectTransform;
         [HideInInspector, SerializeField] private CanvasGroup canvasGroup;
 
@@ -119,3 +120,4 @@ namespace work.ctrl3d
         private void Hide() => HideAsync().Forget();
     }
 }
+#endif
