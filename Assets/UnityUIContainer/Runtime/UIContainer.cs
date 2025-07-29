@@ -1,4 +1,4 @@
-#if ALCHEMY_SUPPORT
+//#if ALCHEMY_SUPPORT
 using System;
 using System.Threading;
 using Alchemy.Inspector;
@@ -28,8 +28,8 @@ namespace work.ctrl3d
         public UnityEvent onHideStarted;
         public UnityEvent onHideCompleted;
 
-        private RectTransform _rectTransform;
-        private CanvasGroup _canvasGroup;
+        public RectTransform RectTransform { get; private set; }
+        public CanvasGroup CanvasGroup { get; private set; }
 
         public event Action OnShowStarted;
         public event Action OnShowCompleted;
@@ -38,22 +38,22 @@ namespace work.ctrl3d
 
         private void Awake()
         {
-            _rectTransform = GetComponent<RectTransform>();
-            _canvasGroup = GetComponent<CanvasGroup>();
+            RectTransform = GetComponent<RectTransform>();
+            CanvasGroup = GetComponent<CanvasGroup>();
         }
 
         private void OnEnable()
         {
-            _rectTransform.SetAnchorPreset(anchorPreset);
+            RectTransform.SetAnchorPreset(anchorPreset);
         }
 
         public virtual void SetData(UIContainerData data)
         {
             if (data.name != null) gameObject.name = data.name;
-            if (data.anchorPreset != AnchorPreset.UseDefault) _rectTransform.SetAnchorPreset(data.anchorPreset);
-            if (data.position != Vector2.zero) _rectTransform.anchoredPosition = data.position;
-            if (data.sizeDelta != Vector2.zero) _rectTransform.sizeDelta = data.sizeDelta;
-            if (data.offset != Vector2.zero) _rectTransform.anchoredPosition = data.offset;
+            if (data.anchorPreset != AnchorPreset.UseDefault) RectTransform.SetAnchorPreset(data.anchorPreset);
+            if (data.position != Vector2.zero) RectTransform.anchoredPosition = data.position;
+            if (data.sizeDelta != Vector2.zero) RectTransform.sizeDelta = data.sizeDelta;
+            if (data.offset != Vector2.zero) RectTransform.anchoredPosition = data.offset;
             if (data.showEase != Ease.Linear) showEase = data.showEase;
             if (data.showDuration != 0f) showDuration = data.showDuration;
             if (data.hideEase != Ease.Linear) hideEase = data.hideEase;
@@ -62,9 +62,9 @@ namespace work.ctrl3d
 
         public virtual void SetActive(bool isActive, float canvasGroupAlpha)
         {
-            _canvasGroup.alpha = canvasGroupAlpha;
-            _canvasGroup.blocksRaycasts = isActive;
-            _canvasGroup.interactable = isActive;
+            CanvasGroup.alpha = canvasGroupAlpha;
+            CanvasGroup.blocksRaycasts = isActive;
+            CanvasGroup.interactable = isActive;
             gameObject.SetActive(isActive);
         }
 
@@ -75,7 +75,7 @@ namespace work.ctrl3d
 
             SetActive(true, 0f);
 
-            await LMotion.Create(0f, 1f, showDuration).WithEase(showEase).BindToAlpha(_canvasGroup)
+            await LMotion.Create(0f, 1f, showDuration).WithEase(showEase).BindToAlpha(CanvasGroup)
                 .ToUniTask(CancellationTokenSource
                     .CreateLinkedTokenSource(destroyCancellationToken, cancellationToken)
                     .Token);
@@ -84,15 +84,22 @@ namespace work.ctrl3d
             onShowCompleted?.Invoke();
         }
 
+        public void SetSizeDelta(float width, float height) => RectTransform.SetSizeDelta(width, height);
+        public void SetSizeDelta(Vector2 sizeDelta) => RectTransform.SetSizeDelta(sizeDelta);
+        public void SetAnchoredPosition(float x, float y) => RectTransform.SetAnchoredPosition(x, y);
+        public void SetAnchoredPosition(Vector2 position) => RectTransform.SetAnchoredPosition(position);
+        public void SetAnchoredPosition3D(float x, float y, float z) => RectTransform.SetAnchoredPosition3D(x, y, z);
+        public void SetAnchoredPosition3D(Vector3 position) => RectTransform.SetAnchoredPosition3D(position);
+        
         public virtual async UniTask HideAsync(bool isActive = false, CancellationToken cancellationToken = default)
         {
-            if (!_canvasGroup) return;
-            if (_canvasGroup.alpha == 0 && isActive) return;
+            if (!CanvasGroup) return;
+            if (CanvasGroup.alpha == 0 && isActive) return;
 
             OnHideStarted?.Invoke();
             onHideStarted?.Invoke();
 
-            await LMotion.Create(1f, 0f, hideDuration).WithEase(hideEase).BindToAlpha(_canvasGroup)
+            await LMotion.Create(1f, 0f, hideDuration).WithEase(hideEase).BindToAlpha(CanvasGroup)
                 .ToUniTask(CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken, cancellationToken)
                     .Token);
             SetActive(isActive, 0f);
@@ -110,9 +117,9 @@ namespace work.ctrl3d
 
         private void OnValidate()
         {
-            if (!_rectTransform) _rectTransform = GetComponent<RectTransform>();
-            if(!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
-            _rectTransform.SetAnchorPreset(anchorPreset);
+            if (!RectTransform) RectTransform = GetComponent<RectTransform>();
+            if(!CanvasGroup) CanvasGroup = GetComponent<CanvasGroup>();
+            RectTransform.SetAnchorPreset(anchorPreset);
         }
 
         [Button, HorizontalGroup]
@@ -122,4 +129,4 @@ namespace work.ctrl3d
         private void Hide() => HideAsync().Forget();
     }
 }
-#endif
+//#endif
