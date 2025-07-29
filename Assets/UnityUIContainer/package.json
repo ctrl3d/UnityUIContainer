@@ -1,0 +1,22 @@
+﻿{
+  "name": "work.ctrl3d.unity-ui-container",
+  "version": "0.1.0",
+  "displayName": "UnityUIContainer",
+  "description": "",
+  "unity": "2022.3",
+  "documentationUrl": "https://ctrl3d.github.io/UnityUIContainer",
+  "changelogUrl": "https://github.com/ctrl3d/UnityUIContainer/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/ctrl3d/UnityUIContainer/blob/main/LICENSE",
+  "dependencies": {
+  },
+  "keywords": [
+    "unity",
+    "ui",
+    "container"
+  ],
+  "author": {
+    "name": "Seungmin Lee",
+    "email": "ctrl3d@gmail.com",
+    "url": "https://ctrl3d.work"
+  }
+}

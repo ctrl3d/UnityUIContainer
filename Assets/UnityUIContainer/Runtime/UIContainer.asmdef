@@ -1,0 +1,20 @@
+{
+    "name": "UIContainer",
+    "rootNamespace": "work.ctrl3d",
+    "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:3b570a5146f9d4f0fa107ed4559471a3",
+        "GUID:3aa1866a824b5472da50fe142777d95f",
+        "GUID:88be65f96b86746888c927a5c8ff3534",
+        "GUID:48f782738794458695a663940b5314f4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
