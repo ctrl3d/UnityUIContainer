@@ -1,4 +1,4 @@
-//#if ALCHEMY_SUPPORT
+#if ALCHEMY_SUPPORT
 using System;
 using System.Threading;
 using Alchemy.Inspector;
@@ -129,4 +129,4 @@ namespace work.ctrl3d
         private void Hide() => HideAsync().Forget();
     }
 }
-//#endif
+#endif
