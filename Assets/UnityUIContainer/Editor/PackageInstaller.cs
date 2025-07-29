@@ -6,7 +6,7 @@ using UnityEditor.Build;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-namespace work.ctrl3d.WinUtil
+namespace work.ctrl3d.UnityUIContainer
 {
     [InitializeOnLoad]
     public class PackageInstaller
@@ -21,8 +21,7 @@ namespace work.ctrl3d.WinUtil
         private const string AlchemyGitUrl = "https://github.com/annulusgames/Alchemy.git?path=/Alchemy/Assets/Alchemy";
         
         private const string UnityExtensionsName = "work.ctrl3d.unity-extensions";
-        private const string UnityExtensionsGitUrl =
-            "https://github.com/ctrl3d/UnityExtensions.git?path=Assets/UnityExtensions";
+        private const string UnityExtensionsGitUrl = "https://github.com/ctrl3d/UnityExtensions.git?path=Assets/UnityExtensions";
         
         static PackageInstaller()
         {

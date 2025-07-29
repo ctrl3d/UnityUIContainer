@@ -1,8 +1,12 @@
 {
     "name": "UIContainer.Editor",
     "rootNamespace": "work.ctrl3d",
-    "references": [],
-    "includePlatforms": [],
+    "references": [
+        "GUID:5fd453cd0d182422093c4a764fd5eadb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
