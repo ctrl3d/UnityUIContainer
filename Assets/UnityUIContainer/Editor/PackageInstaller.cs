@@ -37,12 +37,6 @@ namespace work.ctrl3d.UnityUIContainer
             var isAlchemyInstalled = CheckPackageInstalled(AlchemyName);
             if (!isAlchemyInstalled) AddGitPackage(AlchemyName, AlchemyGitUrl);
             
-            if(HasScriptingDefineSymbol("UNITASK_SUPPORT")) return;
-            AddScriptingDefineSymbol("UNITASK_SUPPORT");
-            
-            if(HasScriptingDefineSymbol("ALCHEMY_SUPPORT")) return;
-            AddScriptingDefineSymbol("ALCHEMY_SUPPORT");
-            
             if(HasScriptingDefineSymbol("LITMOTION_SUPPORT_UNITASK")) return;
             AddScriptingDefineSymbol("LITMOTION_SUPPORT_UNITASK");
         }

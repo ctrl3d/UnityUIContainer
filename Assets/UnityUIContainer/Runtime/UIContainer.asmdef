@@ -19,7 +19,7 @@
         {
             "name": "com.annulusgames.lit-motion",
             "expression": "",
-            "define": "USE_LIT_MOTION"
+            "define": "USE_LITMOTION"
         },
         {
             "name": "work.ctrl3d.unity-extensions",
@@ -30,6 +30,11 @@
             "name": "com.cysharp.unitask",
             "expression": "",
             "define": "USE_UNITASK"
+        },
+        {
+            "name": "com.annulusgames.alchemy",
+            "expression": "",
+            "define": "USE_ALCHEMY"
         }
     ],
     "noEngineReferences": false

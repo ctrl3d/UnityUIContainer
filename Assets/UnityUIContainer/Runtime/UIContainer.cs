@@ -1,13 +1,18 @@
-#if ALCHEMY_SUPPORT
 using System;
 using System.Threading;
 using Alchemy.Inspector;
+#if USE_UNITASK
 using Cysharp.Threading.Tasks;
+#endif
+#if USE_LITMOTION
 using LitMotion;
 using LitMotion.Extensions;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
+#if USE_UNITY_EXTENSIONS
 using AnchorPreset = work.ctrl3d.RectTransformExtensions.AnchorPreset;
+#endif
 
 namespace work.ctrl3d
 {
@@ -129,4 +134,3 @@ namespace work.ctrl3d
         private void Hide() => HideAsync().Forget();
     }
 }
-#endif
