@@ -19,7 +19,12 @@
         {
             "name": "com.annulusgames.lit-motion",
             "expression": "",
-            "define": "LITMOTION_SUPPORT"
+            "define": "USE_LIT_MOTION"
+        },
+        {
+            "name": "work.ctrl3d.unity-extensions",
+            "expression": "",
+            "define": "USE_UNITY_EXTENSIONS"
         }
     ],
     "noEngineReferences": false
