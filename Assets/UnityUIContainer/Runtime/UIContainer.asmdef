@@ -25,6 +25,11 @@
             "name": "work.ctrl3d.unity-extensions",
             "expression": "",
             "define": "USE_UNITY_EXTENSIONS"
+        },
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "USE_UNITASK"
         }
     ],
     "noEngineReferences": false
