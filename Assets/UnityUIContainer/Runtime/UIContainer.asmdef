@@ -15,6 +15,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.annulusgames.lit-motion",
+            "expression": "",
+            "define": "LITMOTION_SUPPORT"
+        }
+    ],
     "noEngineReferences": false
 }

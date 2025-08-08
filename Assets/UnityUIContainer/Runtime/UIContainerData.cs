@@ -1,5 +1,7 @@
 ﻿using System;
+#if LITMOTION_SUPPORT
 using LitMotion;
+#endif
 using UnityEngine;
 using AnchorPreset = work.ctrl3d.RectTransformExtensions.AnchorPreset;
 
