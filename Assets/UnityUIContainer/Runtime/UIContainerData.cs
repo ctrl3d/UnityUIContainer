@@ -1,11 +1,9 @@
 ﻿#if USE_LITMOTION
-using LitMotion;
-#endif
-using System;
-using UnityEngine;
 #if USE_UNITY_EXTENSIONS
+using System;
+using LitMotion;
+using UnityEngine;
 using AnchorPreset = work.ctrl3d.RectTransformExtensions.AnchorPreset;
-#endif
 
 namespace work.ctrl3d
 {
@@ -23,3 +21,5 @@ namespace work.ctrl3d
         public float hideDuration;
     }
 }
+#endif
+#endif

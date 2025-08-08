@@ -1,18 +1,16 @@
+#if USE_UNITASK
+#if USE_LITMOTION
+#if USE_UNITY_EXTENSIONS
 using System;
 using System.Threading;
 using Alchemy.Inspector;
-#if USE_UNITASK
 using Cysharp.Threading.Tasks;
-#endif
-#if USE_LITMOTION
 using LitMotion;
 using LitMotion.Extensions;
-#endif
 using UnityEngine;
 using UnityEngine.Events;
-#if USE_UNITY_EXTENSIONS
 using AnchorPreset = work.ctrl3d.RectTransformExtensions.AnchorPreset;
-#endif
+
 
 namespace work.ctrl3d
 {
@@ -20,15 +18,13 @@ namespace work.ctrl3d
     [RequireComponent(typeof(CanvasGroup))]
     public class UIContainer : MonoBehaviour, IUIContainer
     {
-        [Title("Settings")]
-        [SerializeField] private AnchorPreset anchorPreset = AnchorPreset.UseDefault;
+        [Title("Settings")] [SerializeField] private AnchorPreset anchorPreset = AnchorPreset.UseDefault;
         [SerializeField] private Ease showEase = Ease.Linear;
         [SerializeField] private float showDuration = 0.2f;
         [SerializeField] private Ease hideEase = Ease.Linear;
         [SerializeField] private float hideDuration = 0.2f;
 
-        [Title("Events")] 
-        public UnityEvent onShowStarted;
+        [Title("Events")] public UnityEvent onShowStarted;
         public UnityEvent onShowCompleted;
         public UnityEvent onHideStarted;
         public UnityEvent onHideCompleted;
@@ -88,7 +84,7 @@ namespace work.ctrl3d
             OnShowCompleted?.Invoke();
             onShowCompleted?.Invoke();
         }
-        
+
         public virtual async UniTask HideAsync(bool isActive = false, CancellationToken cancellationToken = default)
         {
             if (!CanvasGroup) return;
@@ -112,7 +108,7 @@ namespace work.ctrl3d
             Destroy(gameObject);
             await UniTask.Yield();
         }
-        
+
         public void SetSizeDelta(float width, float height) => RectTransform.SetSizeDelta(width, height);
         public void SetSizeDelta(Vector2 sizeDelta) => RectTransform.SetSizeDelta(sizeDelta);
         public void SetAnchoredPosition(float x, float y) => RectTransform.SetAnchoredPosition(x, y);
@@ -123,7 +119,7 @@ namespace work.ctrl3d
         private void OnValidate()
         {
             if (!RectTransform) RectTransform = GetComponent<RectTransform>();
-            if(!CanvasGroup) CanvasGroup = GetComponent<CanvasGroup>();
+            if (!CanvasGroup) CanvasGroup = GetComponent<CanvasGroup>();
             RectTransform.SetAnchorPreset(anchorPreset);
         }
 
@@ -134,3 +130,6 @@ namespace work.ctrl3d
         private void Hide() => HideAsync().Forget();
     }
 }
+#endif
+#endif
+#endif
