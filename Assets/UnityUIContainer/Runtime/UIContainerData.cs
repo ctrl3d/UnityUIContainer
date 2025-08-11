@@ -16,9 +16,11 @@ namespace work.ctrl3d
         public Vector2 position = Vector2.zero;
         public Vector2 sizeDelta = Vector2.zero;
         public Vector2 offset = Vector2.zero;
+#if USE_LITMOTION
         public Ease showEase;
         public float showDuration;
         public Ease hideEase;
         public float hideDuration;
+#endif
     }
 }
