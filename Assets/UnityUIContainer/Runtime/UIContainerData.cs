@@ -1,9 +1,12 @@
 ﻿using System;
-using LitMotion;
 using UnityEngine;
 #if USE_LITMOTION
+using LitMotion;
+#endif
+#if USE_UNITY_EXTENSIONS
 using AnchorPreset = work.ctrl3d.RectTransformExtensions.AnchorPreset;
 #endif
+
 namespace work.ctrl3d
 {
     [Serializable]
