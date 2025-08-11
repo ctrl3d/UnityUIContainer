@@ -1,4 +1,5 @@
-﻿#if USE_LITMOTION
+﻿#if USE_UNITASK
+#if USE_LITMOTION
 #if USE_UNITY_EXTENSIONS
 using System;
 using LitMotion;
@@ -21,5 +22,6 @@ namespace work.ctrl3d
         public float hideDuration;
     }
 }
+#endif
 #endif
 #endif
